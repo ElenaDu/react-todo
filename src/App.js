@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   // State hooks for managing the todo list and loading state
@@ -13,12 +18,12 @@ function App() {
     // Define options with access credentials
     const options = {
       method: 'GET',
-      headers: { Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`}
+      headers: { Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}` }
     };
     // Define API URL
     const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
-    
-    
+
+
     try {
       // Fetch data from the API
       const response = await fetch(url, options)
@@ -33,21 +38,21 @@ function App() {
       const data = await response.json();
       const todos = data.records.map((todo) => {
 
-        const newTodo =  {
-            id: todo.id,
-            title: todo.fields.title
+        const newTodo = {
+          id: todo.id,
+          title: todo.fields.title
         }
 
         return newTodo
 
-    });
+      });
       // Set the application's todoList by passing the todos created above to setTodoList
       setTodoList(todos);
 
       // Use setIsLoading to set isLoading to false to indicate to the user the fetch is complete
       setIsLoading(false);
-      
-     // Handle errors during data fetching
+
+      // Handle errors during data fetching
     } catch (error) {
       console.log('Error fetching data:', error.message);
     }
@@ -63,7 +68,7 @@ function App() {
     };
     // Define the URL for adding a new todo
     const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
-    
+
     //  Define access credentials for POST request
     const options = {
       method: 'POST',
@@ -76,7 +81,7 @@ function App() {
 
     try {
       // Send a POST request to add a new todo. Fetch data from the API
-      const response = await fetch(url,options);
+      const response = await fetch(url, options);
 
       // Check if the response is not successful
       if (!response.ok) {
@@ -87,9 +92,9 @@ function App() {
       // Parse the JSON response and update the todoList state
       const addedTodo = await response.json();
       setTodoList([...todoList, { id: addedTodo.id, title: addedTodo.fields.title }]);
-       
+
       // Handle errors during adding a todo
-    } catch (error){
+    } catch (error) {
       console.log('Error fetching data:', error.message);
       return null;
     }
@@ -98,7 +103,7 @@ function App() {
   useEffect(() => {
     fetchData();
   }, []);
-   
+
   // Effect hook to save todoList to local storage when it changes
   useEffect(() => {
     if (!isLoading) {
@@ -114,17 +119,33 @@ function App() {
 
   };
 
-  // Render the Todo List app components
+  // Setup Router
   return (
-    <>
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      {
-        isLoading ?
-          <p>Loading...</p> :
-          <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-      }
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+
+          <>
+            <h1>Todo List</h1>
+            <AddTodoForm onAddTodo={addTodo} />
+            {
+              isLoading ?
+                <p>Loading...</p> :
+                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+            }
+          </>
+        }
+        />
+
+        <Route path="/new" element={
+          <h1>New Todo List</h1>
+        }
+        />
+      </Routes>
+    </BrowserRouter>
+
+
+
   );
 }
 
