@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import Footer from './Footer.js';
+import Header from './Header.js';
+
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
+import style from './App.module.css';
 
 function App() {
   // State hooks for managing the todo list and loading state
@@ -124,15 +128,18 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-
           <>
-            <h1>Todo List</h1>
-            <AddTodoForm onAddTodo={addTodo} />
-            {
-              isLoading ?
-                <p>Loading...</p> :
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-            }
+            <Header />
+            <div className={style.App} >
+              <h1>Todo List</h1>
+              <AddTodoForm onAddTodo={addTodo} />
+              {
+                isLoading ?
+                  <p>Loading...</p> :
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              }
+            </div>
+            <Footer />
           </>
         }
         />

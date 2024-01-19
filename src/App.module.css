@@ -1,0 +1,10 @@
+.App {
+    background-image: url('./iStock-1320330053.jpg');
+    min-height: 100vh;    
+}
+body {
+    font-family: 'Kalam', cursive;
+  }
+h1 {
+    color: #104674;
+}
