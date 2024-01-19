@@ -117,9 +117,38 @@ function App() {
   }, [todoList, isLoading]);
 
   // Function to remove a todo by its ID
-  function removeTodo(id) {
+
+  const removeTodo = async (id) => {
+    //Create a new todo list excluding the item with the specified ID
     const updatedTodoList = todoList.filter(todo => todo.id !== id);
     setTodoList(updatedTodoList);
+
+    
+    // Define the URL for deleting the todo item from Airtable
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+
+    // Define access credentials for DELETE request
+    const options = {
+      method: 'DELETE',
+      headers: {
+        "Authorization": `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    try {
+      // Send a DELETE request to delete the todo item from table. Fetch data from the API
+      const response = await fetch(url, options);
+
+      // Check if the response is not successful
+      if (!response.ok) {
+        const message = `Error deleting todo: ${response.status}`;
+        throw new Error(message);
+      }
+      console.log('Todo deleted successfully');
+    } catch (error) {
+      console.log('Error deleting todo:', error.message)
+    }
+
 
   };
 
