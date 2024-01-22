@@ -1,11 +1,11 @@
 import React from 'react';
-import style from './Header.module.css';
+import styles from './Header.module.css';
 import homeOfficeBanner from './home_office_banner_narrow_new.jpg';
 
 function Header() {
     return (
-        <header className={style.Header}>
-            <div className={style.TopDiv}>
+        <header className={styles.header}>
+            <div className={styles.topDiv}>
                 <nav>
                     <ul>
                         <li></li>
@@ -14,7 +14,7 @@ function Header() {
 
                 </nav>
             </div>
-            <div className={style.ImgDiv}>
+            <div className={styles.imgDiv}>
                 <img src={homeOfficeBanner} alt="Home office banner." />
             </div>
 

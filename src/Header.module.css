@@ -1,21 +1,21 @@
-.Header {
+.header {
    
 }
 
-.TopDiv {
+.topDiv {
     background-color: #ABD2F3;
     margin: 0; /* Reset margin */
     padding: 0; /* Reset padding */
    
 }
 
-.ImgDiv {
-    display: flex;
-    justify-content: center;
+.imgDiv {
+   /* display: flex;
+    justify-content: center;*/
     
 }
 
-.ImgDiv img {
+.imgDiv img {
     width: 100%;
     margin: none;
     padding: none;        

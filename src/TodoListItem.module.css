@@ -1,5 +1,35 @@
-/*Add a ruleset for class ListItem that changes the text color*/
-.ListItem {
+/*Add a ruleset for class ListItem*/
+.listItem {
     color: #344654;
     font-size: 24px;
+    margin: 8px;
+}
+/*Add a ruleset for class ButtonItem*/
+.buttonItem {
+    padding: 6px 8px;
+    margin: 8px 16px;
+    font-size: 18px;
+    background-color: #ABD2F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+}
+
+/* For this project I assume that mobile phones are under 500px, tablets are often between
+500 and 1000px, and anything larger than 1000px is likely to be a normal browser screen. */
+
+@media screen and (max-width: 500px) {
+    .listItem {
+        font-size: 16px;
+        margin: 4px;
+    }
+
+    .buttonItem {
+        padding: 3px;
+        margin: 4px;
+        font-size: 16px;
+        background-color: #2D89D1;
+    }
 }

@@ -1,0 +1,20 @@
+.button {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #6B8092;
+    border-radius: 4px;
+    background-color: #30404C;
+    color: white;
+    cursor: pointer;
+  }
+
+/* For this project I assume that mobile phones are under 500px, tablets are often between
+500 and 1000px, and anything larger than 1000px is likely to be a normal browser screen. */
+
+@media screen and (max-width: 500px) {
+    .button {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+

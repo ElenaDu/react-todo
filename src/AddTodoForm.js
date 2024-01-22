@@ -1,5 +1,6 @@
 import React from 'react'
 import InputWithLabel from './InputWithLabel';
+import style from './AddTodoForm.module.css';
 
 export default function AddTodoForm({ onAddTodo }) {
 
@@ -32,7 +33,7 @@ export default function AddTodoForm({ onAddTodo }) {
             >
                 Title
             </InputWithLabel>
-            <button type="submit" style={{ marginLeft: '5px' }}>Add</button>
+            <button type="submit" className={style.button}>Add</button>
         </form>
     );
 }

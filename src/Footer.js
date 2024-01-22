@@ -1,9 +1,9 @@
 import React from 'react';
-import style from './Footer.module.css';
+import styles from './Footer.module.css';
 
 function Footer() {
     return(
-        <footer className={style.Footer}>
+        <footer className={styles.footer}>
             <p>&copy; {new Date().getFullYear()} Alena Dudko</p>
         </footer>
 
