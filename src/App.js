@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
+import Footer from './Footer.js';
+import Header from './Header.js';
+
+
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
+import styles from './App.module.css';
 
 function App() {
   // State hooks for managing the todo list and loading state
@@ -112,27 +117,69 @@ function App() {
 
   }, [todoList, isLoading]);
 
-  // Function to remove a todo by its ID
-  function removeTodo(id) {
+
+  // Function to delete a todo by its ID from Airtable
+
+  const deleteTodo = async (id) => {
+
+    // Define the URL for deleting the todo item from Airtable
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default/${id}`;
+
+    // Define access credentials for DELETE request
+    const options = {
+      method: 'DELETE',
+      headers: {
+        "Authorization": `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}`,
+      },
+    };
+
+    try {
+      // Send a DELETE request to delete the todo item from table. Fetch data from the API
+      const response = await fetch(url, options);
+
+      // Check if the response is not successful
+      if (!response.ok) {
+        const message = `Error deleting todo: ${response.status}`;
+        throw new Error(message);
+      }
+      // Parse the JSON response
+      console.log('Todo deleted successfully.');
+      return await response.json();
+
+    } catch (error) {
+      console.log('Error deleting todo:', error.message)
+      return null;
+    };
+
+  };
+
+  //Funtion to remove a todo from the local storage and update ToDoList
+  const removeTodo = async (id) => {
+    await deleteTodo(id);
     const updatedTodoList = todoList.filter(todo => todo.id !== id);
     setTodoList(updatedTodoList);
 
   };
+
+
 
   // Setup Router
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={
-
           <>
-            <h1>Todo List</h1>
-            <AddTodoForm onAddTodo={addTodo} />
-            {
-              isLoading ?
-                <p>Loading...</p> :
-                <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
-            }
+            <Header />
+            <div className={styles.app} >
+              <h1>Todo List</h1>
+              <AddTodoForm onAddTodo={addTodo} />
+              {
+                isLoading ?
+                  <p>Loading...</p> :
+                  <TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              }
+            </div>
+            <Footer />
           </>
         }
         />

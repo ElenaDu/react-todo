@@ -1,0 +1,22 @@
+.header {
+   
+}
+
+.topDiv {
+    background-color: #ABD2F3;
+    margin: 0; /* Reset margin */
+    padding: 0; /* Reset padding */
+   
+}
+
+.imgDiv {
+   /* display: flex;
+    justify-content: center;*/
+    
+}
+
+.imgDiv img {
+    width: 100%;
+    margin: none;
+    padding: none;        
+}
