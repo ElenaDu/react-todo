@@ -1,6 +1,7 @@
 import React from 'react'
 import InputWithLabel from './InputWithLabel';
-import style from './AddTodoForm.module.css';
+import styles from './AddTodoForm.module.css';
+import PropTypes from 'prop-types';
 
 export default function AddTodoForm({ onAddTodo }) {
 
@@ -33,7 +34,11 @@ export default function AddTodoForm({ onAddTodo }) {
             >
                 Title
             </InputWithLabel>
-            <button type="submit" className={style.button}>Add</button>
+            <button type="submit" className={styles.button}>Add</button>
         </form>
     );
 }
+//Define the propTypes property (with key 'onAddTodo' and value 'PropTypes.func').
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func,
+};

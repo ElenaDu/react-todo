@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import TodoList from './TodoList';
-import AddTodoForm from './AddTodoForm';
-import Footer from './Footer.js';
-import Header from './Header.js';
+import TodoList from './components/TodoList';
+import AddTodoForm from './components/AddTodoForm';
+import Footer from './components/Footer.js';
+import Header from './components/Header.js';
 
 
 import {
@@ -11,6 +11,7 @@ import {
   Route
 } from "react-router-dom";
 import styles from './App.module.css';
+
 
 function App() {
   // State hooks for managing the todo list and loading state
