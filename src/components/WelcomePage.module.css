@@ -1,0 +1,18 @@
+.text {
+    /* Styles for the text container */
+    color: #344654;
+    font-size: 24px;
+    margin: 12px;
+}
+
+.link {
+    /* Styles for the link */
+    font-weight: bold;
+    color: #2D89D1;
+    text-decoration: none;
+}
+
+.link:hover {
+    /* Styles for the link on hover */
+    text-decoration: underline; 
+}
