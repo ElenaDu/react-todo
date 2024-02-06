@@ -28,7 +28,8 @@ h1 {
         background-image: url('./iStock-1320330053_small.jpg');    
       }
     h1 {
-        font-size: 2em;
+        font-size: 36px;
+        margin: 4px;
     }
 }
 
@@ -36,5 +37,8 @@ h1 {
     .app {
         background-image: url('./iStock-1320330053_small.jpg');    
       }
+    h1 {
+        font-size: 36px;
+    }
     
 }
