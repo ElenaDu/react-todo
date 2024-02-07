@@ -28,7 +28,7 @@ function App() {
       headers: { Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}` }
     };
     // Define API URL
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view&sort[0][field]=title&sort[0][direction]=asc`;
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view`;
 
 
     try {
@@ -43,6 +43,23 @@ function App() {
 
       // Parse the JSON response
       const data = await response.json();
+
+      // Sort the data.records array based on the title field
+
+      data.records.sort((objectA, objectB) => {
+        const titleA = objectA.fields.title.toUpperCase();
+        const titleB = objectB.fields.title.toUpperCase();
+        if (titleA < titleB) {
+          return -1;
+        }
+        else if (titleA > titleB) {
+          return 1;
+        }
+        else {
+          return 0;
+        }
+
+      });
       const todos = data.records.map((todo) => {
 
         const newTodo = {
