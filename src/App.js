@@ -3,6 +3,7 @@ import TodoList from './components/TodoList';
 import AddTodoForm from './components/AddTodoForm';
 import Footer from './components/Footer.js';
 import Header from './components/Header.js';
+import WelcomePage from './components/WelcomePage.js';
 
 
 import {
@@ -27,7 +28,7 @@ function App() {
       headers: { Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_TOKEN}` }
     };
     // Define API URL
-    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}`;
+    const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/${process.env.REACT_APP_TABLE_NAME}?view=Grid%20view`;
 
 
     try {
@@ -42,6 +43,23 @@ function App() {
 
       // Parse the JSON response
       const data = await response.json();
+
+      // Sort the data.records array based on the title field
+
+      data.records.sort((objectA, objectB) => {
+        const titleA = objectA.fields.title.toUpperCase();
+        const titleB = objectB.fields.title.toUpperCase();
+        if (titleA < titleB) {
+          return -1;
+        }
+        else if (titleA > titleB) {
+          return 1;
+        }
+        else {
+          return 0;
+        }
+
+      });
       const todos = data.records.map((todo) => {
 
         const newTodo = {
@@ -172,6 +190,17 @@ function App() {
           <>
             <Header />
             <div className={styles.app} >
+              <WelcomePage />
+            </div>
+            <Footer />
+          </>
+
+        }
+        />
+        <Route path="/todos" element={
+          <>
+            <Header />
+            <div className={styles.app} >
               <h1>Todo List</h1>
               <AddTodoForm onAddTodo={addTodo} />
               {
@@ -184,11 +213,11 @@ function App() {
           </>
         }
         />
-
+        {/*
         <Route path="/new" element={
           <h1>New Todo List</h1>
         }
-        />
+        />*/}
       </Routes>
     </BrowserRouter>
 

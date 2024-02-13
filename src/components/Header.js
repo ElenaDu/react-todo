@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import homeOfficeBanner from './home_office_banner_narrow_new.jpg';
 
@@ -8,8 +9,12 @@ function Header() {
             <div className={styles.topDiv}>
                 <nav>
                     <ul>
-                        <li></li>
-                        <li></li>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/todos">Todo List</Link>
+                        </li>
                     </ul>
 
                 </nav>
